@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Digital Modern - Romeo & Juliet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Variabel */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        :root {
+            --primary: #8fa89b; /* Sage green estetik */
+            --primary-dark: #6e8478;
+            --accent: #d4af37; /* Gold lembut */
+            --bg-light: #faf8f5; /* Off-white hangat */
+            --text-dark: #2c3e35;
+            --text-muted: #6b7c74;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            padding-bottom: 80px; /* Ruang untuk navbar bawah */
+            text-align: center;
+        }
+
+        /* Efek Bunga Berjatuhan (Sakura/Kelopak) */
+        .petal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            background: linear-gradient(135deg, #ffc0cb, #ffe4e1);
+            border-radius: 150% 0 150% 150%;
+            opacity: 0.6;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(105vh) translateX(80px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Struktur Halaman / Section */
+        section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            display: block;
+            position: relative;
+        }
+
+        /* 1. HOME PAGE SECTION */
+        #home {
+            background: linear-gradient(rgba(44, 62, 53, 0.45), rgba(44, 62, 53, 0.65)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            color: #fff;
+            padding-top: 15vh;
+        }
+
+        #home::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(to top, var(--bg-light), transparent);
+        }
+
+        .home-title {
+            font-family: 'Alex Brush', cursive;
+            font-size: 4.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            margin: 20px 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .home-subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .home-date {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            border-top: 1px solid rgba(255,255,255,0.4);
+            border-bottom: 1px solid rgba(255,255,255,0.4);
+            padding: 10px 25px;
+            margin-top: 25px;
+            display: inline-block;
+        }
+
+        /* Box Nama Tamu Digital */
+        .guest-box {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
+            padding: 25px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-top: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            max-width: 90%,
+            width: 320px;
+            border: 1px solid rgba(143, 168, 155, 0.3);
+        }
+
+        .guest-box p {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .guest-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* 2. ACARA SECTION */
+        #acara {
+            background-color: var(--bg-light);
+        }
+
+        .section-title {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .container-box {
+            max-width: 900px;
+            margin: 40px auto 0 auto;
+            width: 100%;
+            display: table;
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 20px 0;
+        }
+
+        .acara-card {
+            display: table-cell;
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(143, 168, 155, 0.12);
+            border: 1px solid rgba(143, 168, 155, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            vertical-align: top;
+        }
+
+        .acara-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(143, 168, 155, 0.22);
+        }
+
+        .acara-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .acara-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .acara-card .time {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .acara-card .date {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        /* 3. TEMPAT SECTION */
+        #tempat {
+            background-color: #f3efe9;
+        }
+
+        .map-box {
+            width: 100%;
+            max-width: 700px;
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 20px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        }
+
+        .venue-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .venue-address {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .btn-maps {
+            display: inline-block;
+            padding: 12px 35px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(143, 168, 155, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-maps:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* 4. TRANSFER SECTION */
+        #transfer {
+            background-color: var(--bg-light);
+        }
+
+        .transfer-container {
+            max-width: 800px;
+            margin: 30px auto 0 auto;
+            text-align: center;
+        }
+
+        .card-row {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .transfer-card {
+            display: inline-block;
+            width: 280px;
+            background: white;
+            padding: 25px 20px;
+            margin: 15px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(143, 168, 155, 0.15);
+            text-align: left;
+            vertical-align: top;
+            position: relative;
+        }
+
+        .bank-logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 5px;
+        }
+
+        .account-number {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .account-name {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .btn-copy {
+            background: var(--bg-light);
+            border: 1px solid var(--primary);
+            color: var(--primary-dark);
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .btn-copy:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* KONTROL AUDIO (BACKSOUND) */
+        .audio-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(143, 168, 155, 0.3);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .audio-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary-dark);
+        }
+
+        /* SCREEN OVERLAY (GATE) */
+        .overlay-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-light);
+            z-index: 100000;
+            display: block;
+            padding-top: 25vh;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .overlay-gate.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .gate-btn {
+            padding: 15px 35px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(143, 168, 155, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            text-transform: uppercase;
+        }
+
+        .gate-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* 5. BOTTOM NAVIGATION BAR DENGAN EFEK CSS3 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.05);
+            display: table;
+            table-layout: fixed;
+            z-index: 999;
+            border-top: 1px solid rgba(143, 168, 155, 0.2);
+        }
+
+        .nav-item {
+            display: table-cell;
+            text-decoration: none;
+            color: var(--text-muted);
+            vertical-align: middle;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-icon {
+            display: block;
+            margin: 0 auto 4px auto;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Efek Hover & Animasi CSS3 */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 4px 4px 0 0;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-item:hover {
+            color: var(--primary-dark);
+        }
+
+        .nav-item:hover .nav-icon {
+            transform: translateY(-5px) scale(1.15);
+        }
+
+        .nav-item:hover::after {
+            width: 50%;
+        }
+
+        /* Responsif untuk Layar HP / Mobile */
+        @media (max-width: 767px) {
+            .container-box {
+                display: block;
+            }
+            .acara-card {
+                display: block;
+                width: 100%;
+                margin-bottom: 25px;
+            }
+            .transfer-card {
+                width: 90%;
+                margin: 10px auto;
+                display: block;
+            }
+            .home-title {
+                font-size: 3.2rem;
+            }
+        }
+
+        /* Responsif Tablet & Desktop untuk Navbar Melayang */
+        @media (min-width: 768px) {
+            .bottom-nav {
+                width: 550px;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 20px;
+                border-radius: 40px;
+                border: 1px solid rgba(143, 168, 155, 0.3);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+                height: 75px;
+            }
+            .nav-item::after {
+                bottom: 4px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay-gate" id="overlayGate">
+        <h2 style="font-family: 'Alex Brush', cursive; font-size: 3.5rem; color: var(--primary-dark);">Romeo & Juliet</h2>
+        <p style="font-size: 0.85rem; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 20px;">UNDANGAN PERNIKAHAN</p>
+        
+        <div class="guest-box" style="margin-top: 10px; background: #fff;">
+            <p>Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+            <div class="guest-name" id="guestNameGate">Tamu Undangan</div>
+        </div>
+        <br>
+        <button class="gate-btn" onclick="openInvitation()">Buka Undangan</button>
+    </div>
+
+    <div class="petal-container" id="petalContainer"></div>
+
+    <div class="audio-control" onclick="toggleAudio()" id="audioButton" style="display: none;">
+        <svg class="audio-icon" id="audioIcon" viewBox="0 0 24 24">
+            <path d="M12 3v18.177l-5.646-5.646H2V8.469h4.354L12 3zm2 5.086c1.425.688 2.4 2.153 2.4 3.864 0 1.711-.975 3.177-2.4 3.864v-1.638c.614-.523 1-1.298 1-2.226 0-.928-.386-1.703-1-2.226V8.086z"/>
+        </svg>
+    </div>
+
+    <audio id="backsound" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <section id="home">
+        <p class="home-subtitle">The Wedding of</p>
+        <h1 class="home-title">Romeo & Juliet</h1>
+        <p class="home-subtitle">Sabtu, 15 Agustus 2026</p>
+        
+        <div class="guest-box">
+            <p>Spesial Kepada:</p>
+            <div class="guest-name" id="guestNameHome">Tamu Undangan</div>
+        </div>
+    </section>
+
+    <section id="acara">
+        <h2 class="section-title">Rangkaian Acara</h2>
+        <p class="section-subtitle">Momen Bahagia Kami</p>
+        
+        <div class="container-box">
+            <div class="acara-card">
+                <h3>Akad Nikah</h3>
+                <p class="date">Sabtu, 15 Agustus 2026</p>
+                <p class="time">08.00 - 10.00 WIB</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Masjid Agung Baiturrahman<br>Jl. Kenangan Indah No. 12, Jakarta</p>
+            </div>
+            
+            <div class="acara-card">
+                <h3>Resepsi</h3>
+                <p class="date">Sabtu, 15 Agustus 2026</p>
+                <p class="time">11.00 WIB - Selesai</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">Grand Ballroom Luxury Hall<br>Jl. Estetika Utama No. 45, Jakarta</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tempat">
+        <h2 class="section-title">Lokasi Acara</h2>
+        <p class="section-subtitle">Petunjuk Menuju Tempat Pernikahan</p>
+        
+        <div class="map-box">
+            <div class="venue-name">Grand Ballroom Luxury Hall</div>
+            <div class="venue-address">Jl. Estetika Utama No. 45, Kompleks Cinnamon City, Jakarta Selatan</div>
+            <div style="width: 100%; height: 250px; background: #e8e4de; border-radius: 12px; margin-bottom: 25px; display: table; text-align: center;">
+                <span style="display: table-cell; vertical-align: middle; color: var(--text-muted); font-size: 0.9rem;">[ Area Peta Google Maps ]</span>
+            </div>
+            <a href="https://maps.google.com" target="_blank" class="btn-maps">Buka Google Maps</a>
+        </div>
+    </section>
+
+    <section id="transfer">
+        <h2 class="section-title">Kado Digital</h2>
+        <p class="section-subtitle">Dukungan Kasih Anda</p>
+        <p style="font-size: 0.9rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 20px auto; line-height: 1.6;">
+            Bagi keluarga dan sahabat yang ingin memberikan tanda kasih, dapat mengirimkannya melalui dompet digital atau transfer bank berikut:
+        </p>
+        
+        <div class="transfer-container">
+            <div class="card-row">
+                <div class="transfer-card">
+                    <div class="bank-logo">BANK BCA</div>
+                    <div class="account-number" id="bca-num">1234567890</div>
+                    <div class="account-name">A/N Juliet Capulet</div>
+                    <button class="btn-copy" onclick="copyText('bca-num')">Salin No. Rekening</button>
+                </div>
+                
+                <div class="transfer-card">
+                    <div class="bank-logo">BANK MANDIRI</div>
+                    <div class="account-number" id="mandiri-num">9876543210123</div>
+                    <div class="account-name">A/N Romeo Montague</div>
+                    <button class="btn-copy" onclick="copyText('mandiri-num')">Salin No. Rekening</button>
+                </div>
+            </div>
+            
+            <div class="card-row">
+                <div class="transfer-card">
+                    <div class="bank-logo">DANA</div>
+                    <div class="account-number" id="dana-num">081234567890</div>
+                    <div class="account-name">A/N Juliet Capulet</div>
+                    <button class="btn-copy" onclick="copyText('dana-num')">Salin Nomor DANA</button>
+                </div>
+                
+                <div class="transfer-card">
+                    <div class="bank-logo">OVO</div>
+                    <div class="account-number" id="ovo-num">089987654321</div
