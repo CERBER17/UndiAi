@@ -1,1 +1,66 @@
 
+        /* Gaya untuk tombol Scan QR */
+        .btn-scan {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-scan:hover {
+            background-color: #45a049;
+        }
+
+        /* Gaya untuk latar belakang Modal (Popup) */
+        .modal {
+            display: none; /* Sembunyikan modal secara default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5); /* Latar belakang gelap transparan */
+        }
+
+        /* Gaya untuk konten di dalam Popup */
+        .modal-content {
+            background-color: #f9f9f9;
+            margin: 10% auto; /* Jarak dari atas dan posisikan di tengah */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Gaya untuk gambar QR Code */
+        .qr-image {
+            width: 100%;
+            max-width: 250px;
+            margin-top: 15px;
+        }
+
+        /* Gaya untuk tombol Close (X) */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+  
