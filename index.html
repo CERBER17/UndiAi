@@ -8,7 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <!-- css -->
+    <link rel="stylesheet" href="css/qr.css">
+   
     <style>
         /* CSS Reset & Variabel */
         * {
@@ -642,6 +644,49 @@
             <a href="https://maps.app.goo.gl/cnckYYtmLDHRdu21A?g_st=iw
                 " target="_blank" class="btn-maps">Buka Google Maps</a>
         </div>
+
+<!-- Tombol untuk memunculkan Popup -->
+    <div style="text-align: center;">
+        <button id="scanBtn" class="btn-scan">Scan QR</button>
+    </div>
+
+    <!-- Elemen Modal (Popup) -->
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Lokasi Koordinat</h2>
+            <p>Silakan scan QR Code di bawah ini:</p>
+            <!-- Gambar QR Code dari link QuickChart sebelumnya -->
+            <img src="https://quickchart.io/qr?text=https%3A%2F%2Fmaps.google.com%2F%3Fq%3D-6.661583%2C108.488278&size=300" alt="QR Code" class="qr-image">
+        </div>
+    </div>
+
+    <!-- Skrip Javascript untuk mengatur Popup -->
+    <script>
+        // Mengambil elemen-elemen HTML
+        var modal = document.getElementById("qrModal");
+        var btn = document.getElementById("scanBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        // Ketika pengguna mengklik tombol, tampilkan modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // Ketika pengguna mengklik tanda 'X', sembunyikan modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Ketika pengguna mengklik area di luar popup, sembunyikan modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+        
     </section>
 
     <!-- 4. SECTION TRANSFER -->
