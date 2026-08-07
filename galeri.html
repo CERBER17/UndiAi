@@ -1,1 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Gambar Responsif</title>
+    <style>
+        /* Mengatur margin dan font dasar */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* --- PENGATURAN GALERI (6 KOLOM & RESPONSIF) --- */
+        .galeri-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* 6 Kolom sama besar */
+            gap: 15px; /* Jarak antar gambar */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- EFEK GAMBAR & TRANSISI --- */
+        .galeri-container img {
+            width: 100%;
+            height: 200px; /* Tinggi seragam, bisa disesuaikan */
+            object-fit: cover; /* Agar gambar tidak gepeng */
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            
+            /* Efek sebelum gambar dimuat */
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s;
+        }
+
+        /* Kelas yang ditambahkan via JS saat gambar selesai dimuat */
+        .galeri-container img.loaded {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Efek hover saat kursor diarahkan ke gambar */
+        .galeri-container img:hover {
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+            transform: scale(1.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* --- PENGATURAN RESPONSIF --- */
+        /* Layar menengah (Laptop/Tablet Landscape): 4 Kolom */
+        @media (max-width: 1024px) {
+            .galeri-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        /* Layar kecil (Tablet Portrait): 3 Kolom */
+        @media (max-width: 768px) {
+            .galeri-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        /* Layar HP: 2 Kolom */
+        @media (max-width: 480px) {
+            .galeri-container {
+                grid-template-columns: repeat(2, 1fr);
+                height: 150px;
+            }
+        }
+
+        /* --- PENGATURAN LIGHTBOX (GAMBAR BESAR) --- */
+        .modal {
+            display: none; /* Sembunyikan secara default */
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9); /* Background gelap transparan */
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            animation-name: zoom; /* Animasi membesar */
+            animation-duration: 0.4s;
+        }
+
+        @keyframes zoom {
+            from {transform: scale(0)} 
+            to {transform: scale(1)}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Galeri Foto (6 Kolom)</h2>
+
+    <!-- Wadah Galeri -->
+    <div class="galeri-container">
+        <!-- Tambahkan loading="lazy" pada setiap gambar -->
+        <!-- Ganti URL src dengan gambar Anda sendiri -->
+        <img src="https://picsum.photos/id/1011/400/400" loading="lazy" alt="Gambar 1" onclick="bukaModal(this)">
+        <img src="https://picsum.photos/id/1012/400/400" loading="lazy" alt="Gambar 2" onclick="bukaModal(this)">
+        <img src="https://picsum.photos/id/1013/400/400" loading="lazy" alt="Gambar 3" onclick="bukaModal(this)">
+        <img src="https://picsum.photos/id/1014/400/400" loading="lazy" alt="Gambar 4" onclick="bukaModal(this)">
+        <img src="https://picsum.photos/id/1015/400/400" loading="lazy" alt="Gambar 5" onclick="bukaModal(this)">
+        <img src="https://picsum.photos/id/1016/400/400" loading="lazy" alt="Gambar 6" onclick="bukaModal(this)">
+        <img src="https://picsum.photos/id/1018/400/400" loading="lazy" alt="Gambar 7" onclick="bukaModal(this)">
+        <img src="https://picsum.photos/id/1019/400/400" loading="lazy" alt="Gambar 8" onclick="bukaModal(this)">
+        <img src="https://picsum.photos/id/1020/400/400" loading="lazy" alt="Gambar 9" onclick="bukaModal(this)">
+        <img src="https://picsum.photos/id/1021/400/400" loading="lazy" alt="Gambar 10" onclick="bukaModal(this)">
+        <img src="https://picsum.photos/id/1022/400/400" loading="lazy" alt="Gambar 11" onclick="bukaModal(this)">
+        <img src="https://picsum.photos/id/1023/400/400" loading="lazy" alt="Gambar 12" onclick="bukaModal(this)">
+    </div>
+
+    <!-- Modal/Lightbox untuk Gambar Besar -->
+    <div id="modalGambar" class="modal" onclick="tutupModal()">
+        <span class="close" onclick="tutupModal()">&times;</span>
+        <img class="modal-content" id="gambarBesar">
+    </div>
+
+    <script>
+        // --- JAVASCRIPT UNTUK EFEK TRANSISI LAZY LOAD ---
+        document.addEventListener("DOMContentLoaded", function() {
+            const semuaGambar = document.querySelectorAll('.galeri-container img');
+            
+            semuaGambar.forEach(img => {
+                // Jika gambar sudah berada di cache dan langsung termuat
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    // Tambahkan kelas 'loaded' saat gambar selesai diunduh
+                    img.addEventListener('load', () => {
+                        img.classList.add('loaded');
+                    });
+                }
+            });
+        });
+
+        // --- JAVASCRIPT UNTUK LIGHTBOX (GAMBAR KLIK MEMBESAR) ---
+        const modal = document.getElementById("modalGambar");
+        const gambarModal = document.getElementById("gambarBesar");
+
+        // Fungsi membuka modal
+        function bukaModal(elemen) {
+            modal.style.display = "block"; // Tampilkan modal
+            gambarModal.src = elemen.src;  // Ambil sumber gambar yang diklik
+        }
+
+        // Fungsi menutup modal
+        function tutupModal() {
+            modal.style.display = "none"; // Sembunyikan modal
+        }
+    </script>
+
+</body>
+          </html>
 
