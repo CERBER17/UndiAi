@@ -942,6 +942,43 @@
                 console.error("Gagal menyalin teks: ", err);
             });
         }
+
+
+        // --- 5. Intersection Observer for Lazyload Images & Nav Highlight ---
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lazy load images
+            let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            let imageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        let lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        // Add class for CSS transition after load
+                        lazyImage.onload = () => lazyImage.classList.add("loaded");
+                        imageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+            lazyImages.forEach(function(lazyImage) { imageObserver.observe(lazyImage); });
+
+            // Nav active state update based on scroll position
+            const sections = document.querySelectorAll("section");
+            const navItems = document.querySelectorAll(".nav-item");
+            
+            window.addEventListener("scroll", () => {
+                let current = "";
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 150) {
+                        current = section.getAttribute("id");
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.remove("active");
+                    if (item.getAttribute("href").includes(current)) {
+                        item.classList.add("active");
+                }
     </script>
 </body>
 </html>
