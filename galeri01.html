@@ -1,1 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Infinite Loop & Lazy Load</title>
+    <style>
+        /* Pengaturan dasar halaman */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Wadah utama galeri */
+        .gallery-wrapper {
+            width: 100%;
+            overflow: hidden; /* Sembunyikan elemen yang keluar dari layar */
+            background: #1e1e1e;
+            padding: 30px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        /* Track yang akan bergerak */
+        .gallery-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            /* Animasi berjalan 20 detik, linear, dan tidak terbatas (infinite) */
+            animation: scroll 20s linear infinite;
+        }
+
+        /* Opsional: Hentikan animasi saat mouse diarahkan ke galeri */
+        .gallery-track:hover {
+            animation-play-state: paused;
+        }
+
+        /* Ukuran masing-masing item galeri */
+        .gallery-item {
+            width: 300px;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background-color: #333; /* Warna placeholder sebelum gambar dimuat */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        /* Efek zoom saat gambar di-hover */
+        .gallery-item img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Keyframes untuk pergerakan loop */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                /* Bergeser persis setengah dari panjang total track (karena diduplikasi) */
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gallery-wrapper">
+        <div class="gallery-track" id="galleryTrack">
+            <!-- 
+                Atribut loading="lazy" digunakan agar gambar hanya diunduh
+                saat sudah mendekati layar (viewport).
+            -->
+            <div class="gallery-item">
+                <img src="https://picsum.photos/id/1015/600/400" loading="lazy" alt="Pemandangan 1">
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/id/1016/600/400" loading="lazy" alt="Pemandangan 2">
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/id/1018/600/400" loading="lazy" alt="Pemandangan 3">
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/id/1019/600/400" loading="lazy" alt="Pemandangan 4">
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/id/1020/600/400" loading="lazy" alt="Pemandangan 5">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Script untuk menduplikasi gambar agar efek loop terlihat mulus
+        const track = document.getElementById('galleryTrack');
+        const items = track.innerHTML;
+        
+        // Menyalin isi galeri dan menempelkannya di akhir
+        // Ini membuat animasi bisa melompat kembali ke awal tanpa terlihat patah
+        track.innerHTML += items;
+    </script>
+
+</body>
+  </html>
 
