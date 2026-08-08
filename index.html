@@ -13,8 +13,67 @@
     <link rel="stylesheet" href="css/galleryrunning.css">
    
     <style>
+/* galeri slide */
 
+/* --- 5. GALERI SECTION (Infinite Slider & Lazyload) --- */
+        #galeri {
+            overflow: hidden;
+            width: 100%;
+        }
 
+        .slider-wrapper {
+            position: relative;
+            width: 100vw;
+            max-width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+            /* Gradient mask for smooth edge fading */
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .slider-track {
+            display: flex;
+            width: calc(300px * 10); /* Adjust based on image count * 2 for loop */
+            animation: scroll 30s linear infinite;
+        }
+
+        .slider-track:hover {
+            animation-play-state: paused;
+        }
+
+        .slide {
+            width: 300px;
+            height: 400px;
+            margin: 0 15px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: relative;
+            background-color: #eee;
+        }
+
+        /* Lazy Load Effect */
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.05);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .slide img.loaded {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-300px * 5 - 15px * 10)); } /* Scroll half the track */
+        }
+        
+/* galeri slide */
         /* CSS Reset & Variabel */
         * {
             margin: 0;
@@ -741,27 +800,21 @@
     <div id="galeri" class="section">
         <h2>Galeri Kami</h2>
 
-<!-- Wadah Slider Utama -->
-    <div class="slider-container">
-        <div class="slider-track">
-            <!-- 6 Gambar Utama -->
-            <div class="slide-item"><img src="/IMG-20260807-WA0005.jpg" loading="lazy" alt="Gambar 1" onclick="bukaModal(this)"></div>
-            <div class="slide-item"><img src="https://picsum.photos/id/1016/500/350" loading="lazy" alt="Gambar 2" onclick="bukaModal(this)"></div>
-            <div class="slide-item"><img src="https://picsum.photos/id/1018/500/350" loading="lazy" alt="Gambar 3" onclick="bukaModal(this)"></div>
-            <div class="slide-item"><img src="https://picsum.photos/id/1019/500/350" loading="lazy" alt="Gambar 4" onclick="bukaModal(this)"></div>
-            <div class="slide-item"><img src="https://picsum.photos/id/1020/500/350" loading="lazy" alt="Gambar 5" onclick="bukaModal(this)"></div>
-            <div class="slide-item"><img src="https://picsum.photos/id/1021/500/350" loading="lazy" alt="Gambar 6" onclick="bukaModal(this)"></div>
-
-            <!-- Duplikasi 6 Gambar untuk Efek Gulir Tak Terbatas (Infinite Loop Seamless) -->
-            <div class="slide-item"><img src="https://picsum.photos/id/1015/500/350" loading="lazy" alt="Gambar 1" onclick="bukaModal(this)"></div>
-            <div class="slide-item"><img src="https://picsum.photos/id/1016/500/350" loading="lazy" alt="Gambar 2" onclick="bukaModal(this)"></div>
-            <div class="slide-item"><img src="https://picsum.photos/id/1018/500/350" loading="lazy" alt="Gambar 3" onclick="bukaModal(this)"></div>
-            <div class="slide-item"><img src="https://picsum.photos/id/1019/500/350" loading="lazy" alt="Gambar 4" onclick="bukaModal(this)"></div>
-            <div class="slide-item"><img src="https://picsum.photos/id/1020/500/350" loading="lazy" alt="Gambar 5" onclick="bukaModal(this)"></div>
-            <div class="slide-item"><img src="https://picsum.photos/id/1021/500/350" loading="lazy" alt="Gambar 6" onclick="bukaModal(this)"></div>
+         <!-- Galeri slide-->
+<h2 class="section-title">Galeri</h2>
+        <p class="section-subtitle">Kenangan Indah Kami</p>
+        
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                 <!-- Cloned 5 images for infinite loop effect -->
+                <div class="slide"><img data-src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=400&q=80" alt="Galeri 1 Clone" class="lazy"></div>
+                <div class="slide"><img data-src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=400&q=80" alt="Galeri 2 Clone" class="lazy"></div>
+                <div class="slide"><img data-src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=400&q=80" alt="Galeri 3 Clone" class="lazy"></div>
+                <div class="slide"><img data-src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=400&q=80" alt="Galeri 4 Clone" class="lazy"></div>
+                <div class="slide"><img data-src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=400&q=80" alt="Galeri 5 Clone" class="lazy"></div>
+            </div>
         </div>
-    </div>
-
+          <!-- end Galeri slide-->
     
         <div class="gallery-grid">
             <div class="gallery-item">
