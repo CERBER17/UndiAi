@@ -1,1 +1,124 @@
+/* --- CONTAINER & AUTO SCROLL (KANAN KE KIRI) --- */
+        .slider-container {
+            overflow: hidden;
+            width: 100%;
+            background: #ffffff;
+            padding: 25px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
 
+        .slider-track {
+            display: flex;
+            width: max-content;
+            animation: scrollLeft 25s linear infinite;
+        }
+
+        /* Jeda animasi saat kursor diarahkan ke slider agar mudah diklik */
+        .slider-container:hover .slider-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollLeft {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* --- ITEM & UKURAN GAMBAR --- */
+        .slide-item {
+            width: 250px;
+            height: 170px;
+            margin: 0 15px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #eee;
+        }
+
+        .slide-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            
+            /* Efek transisi pemuatan (Lazy Load / Fade-in) */
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out, filter 0.3s ease;
+        }
+
+        /* Kelas yang ditambahkan lewat JS setelah gambar termuat */
+        .slide-item img.loaded {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide-item img:hover {
+            filter: brightness(1.1);
+        }
+
+        /* --- RESPONSIF UNTUK HP & TABLET --- */
+        @media (max-width: 768px) {
+            .slide-item {
+                width: 180px;
+                height: 125px;
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide-item {
+                width: 140px;
+                height: 100px;
+                margin: 0 8px;
+            }
+        }
+
+        /* --- LIGHTBOX (MODAL GAMBAR BESAR) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 8px;
+            animation: zoomModal 0.3s ease;
+        }
+
+        @keyframes zoomModal {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close:hover {
+            color: #bbb;
+          }
