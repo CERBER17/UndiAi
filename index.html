@@ -10,69 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- css -->
     <link rel="stylesheet" href="css/qr.css">
-   <!--  <link rel="stylesheet" href="css/galleryrunning.css">  -->
    
     <style>
 /* galeri slide */
 
-/* --- 5. GALERI SECTION (Infinite Slider & Lazyload) --- */
-        #galeri {
-            overflow: hidden;
-            width: 100%;
-        }
 
-        .slider-wrapper {
-            position: relative;
-            width: 100vw;
-            max-width: 100%;
-            overflow: hidden;
-            padding: 20px 0;
-            /* Gradient mask for smooth edge fading */
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        }
-
-        .slider-track {
-            display: flex;
-            width: calc(300px * 10); /* Adjust based on image count * 2 for loop */
-            animation: scroll 30s linear infinite;
-        }
-
-        .slider-track:hover {
-            animation-play-state: paused;
-        }
-
-        .slide {
-            width: 300px;
-            height: 400px;
-            margin: 0 15px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            position: relative;
-            background-color: #eee;
-        }
-
-        /* Lazy Load Effect */
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transform: scale(1.05);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        .slide img.loaded {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-300px * 5 - 15px * 10)); } /* Scroll half the track */
-        }
-        
 /* galeri slide */
         /* CSS Reset & Variabel */
         * {
@@ -795,24 +737,6 @@
             </div>
         </div>
     </section>
-
-     <!-- Galeri SLIDE -->
-     <section id="galeri">
-        <h2 class="section-title">Galeri</h2>
-        <p class="section-subtitle">Kenangan Indah Kami</p>
-        
-        <div class="slider-wrapper">
-            <div class="slider-track">
-                 <!-- Cloned 5 images for infinite loop effect -->
-                <div class="slide"><img data-src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=400&q=80" alt="Galeri 1 Clone" class="lazy"></div>
-                <div class="slide"><img data-src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=400&q=80" alt="Galeri 2 Clone" class="lazy"></div>
-                <div class="slide"><img data-src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=400&q=80" alt="Galeri 3 Clone" class="lazy"></div>
-                <div class="slide"><img data-src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=400&q=80" alt="Galeri 4 Clone" class="lazy"></div>
-                <div class="slide"><img data-src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=400&q=80" alt="Galeri 5 Clone" class="lazy"></div>
-            </div>
-        </div>
-    </section>
-
     
  <!-- 5. Galeri -->
     <div id="galeri" class="section">
@@ -945,41 +869,7 @@
         }
 
 
-        // --- 5. Intersection Observer for Lazyload Images & Nav Highlight ---
-        document.addEventListener("DOMContentLoaded", function() {
-            // Lazy load images
-            let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-            let imageObserver = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        let lazyImage = entry.target;
-                        lazyImage.src = lazyImage.dataset.src;
-                        // Add class for CSS transition after load
-                        lazyImage.onload = () => lazyImage.classList.add("loaded");
-                        imageObserver.unobserve(lazyImage);
-                    }
-                });
-            });
-            lazyImages.forEach(function(lazyImage) { imageObserver.observe(lazyImage); });
-
-            // Nav active state update based on scroll position
-            const sections = document.querySelectorAll("section");
-            const navItems = document.querySelectorAll(".nav-item");
-            
-            window.addEventListener("scroll", () => {
-                let current = "";
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= sectionTop - 150) {
-                        current = section.getAttribute("id");
-                    }
-                });
-
-                navItems.forEach(item => {
-                    item.classList.remove("active");
-                    if (item.getAttribute("href").includes(current)) {
-                        item.classList.add("active");
-                }
+        
     </script>
 </body>
 </html>
