@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Digital - Aesthetic Modern</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Variables */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        :root {
+            --primary: #94a89a; /* Sage Green */
+            --primary-dark: #6e8274;
+            --accent: #d4af37; /* Soft Gold */
+            --bg-light: #fcfbf9; /* Warm off-white */
+            --text-dark: #333333;
+            --text-muted: #777777;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            padding-bottom: 80px; /* Space for bottom nav */
+            text-align: center;
+        }
+
+        /* Falling Petals Animation */
+        .petal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            background: linear-gradient(135deg, #ffd1dc, #fff0f5);
+            border-radius: 150% 0 150% 150%;
+            opacity: 0.6;
+            box-shadow: 0 0 3px rgba(0,0,0,0.05);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-20px) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(105vh) translateX(100px) rotate(360deg) scale(1.1); opacity: 0; }
+        }
+
+        /* Section Layout */
+        section {
+            min-height: 100vh;
+            padding: 90px 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- 1. HOME SECTION --- */
+        #home {
+            background: linear-gradient(rgba(252, 251, 249, 0.3), rgba(252, 251, 249, 0.9)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+        }
+
+        .home-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            color: var(--primary-dark);
+            margin: 15px 0;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+        }
+
+        .home-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .home-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            letter-spacing: 3px;
+            border-top: 1px solid var(--accent);
+            border-bottom: 1px solid var(--accent);
+            padding: 10px 30px;
+            margin-top: 25px;
+            display: inline-block;
+        }
+
+        .guest-box {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(148, 168, 154, 0.3);
+            width: 90%;
+            max-width: 350px;
+        }
+
+        .guest-box p {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .guest-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* Typography for Sections */
+        .section-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+        .section-subtitle {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        /* --- 2. ACARA SECTION --- */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .acara-card {
+            flex: 1 1 300px;
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(148, 168, 154, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .acara-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .acara-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+
+        .acara-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        .acara-card .date {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .acara-card .time {
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        /* --- 3. TEMPAT SECTION --- */
+        .map-box {
+            width: 100%;
+            max-width: 700px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .venue-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .venue-address {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .btn-action {
+            display: inline-block;
+            padding: 12px 35px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(148, 168, 154, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-action:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* --- 4. TRANSFER SECTION --- */
+        .transfer-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 15px;
+            width: 280px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            border: 1px solid rgba(148, 168, 154, 0.2);
+            display: inline-block;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .bank-logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--bg-light);
+            padding-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .account-number {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .account-name {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .btn-copy {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-copy:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* --- 5. GALERI SECTION (Infinite Slider & Lazyload) --- */
+        #galeri {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            width: 100vw;
+            max-width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+            /* Gradient mask for smooth edge fading */
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .slider-track {
+            display: flex;
+            width: calc(300px * 10); /* Adjust based on image count * 2 for loop */
+            animation: scroll 30s linear infinite;
+        }
+
+        .slider-track:hover {
+            animation-play-state: paused;
+        }
+
+        .slide {
+            width: 300px;
+            height: 400px;
+            margin: 0 15px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: relative;
+            background-color: #eee;
+        }
+
+        /* Lazy Load Effect */
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.05);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .slide img.loaded {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-300px * 5 - 15px * 10)); } /* Scroll half the track */
+        }
+
+        /* AUDIO & GATE */
+        .audio-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--accent);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .overlay-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-light);
+            z-index: 100000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        .overlay-gate.hide { opacity: 0; visibility: hidden; }
+
+        /* --- BOTTOM NAVIGATION (CSS3 Effects) --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 -5px 20px rgba(148, 168, 154, 0.15);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 999;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 0 10px;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            width: 20%;
+        }
+
+        .nav-icon {
+            width: 22px;
+            height: 22px;
+            margin-bottom: 4px;
+            fill: currentColor;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* CSS3 Active/Hover Indicator */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--primary-dark);
+        }
+
+        .nav-item:hover .nav-icon, .nav-item.active .nav-icon {
+            transform: translateY(-4px) scale(1.1);
+            color: var(--accent);
+        }
+
+        .nav-item:hover::after, .nav-item.active::after {
+            width: 30px;
+        }
+
+        /* Responsive Settings */
+        @media (max-width: 768px) {
+            .home-title { font-size: 4rem; }
+            .section-title { font-size: 3.5rem; }
+            .slide { width: 250px; height: 350px; }
+            @keyframes scroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc(-250px * 5 - 15px * 10)); }
+            }
+        }
+
+        @media (min-width: 769px) {
+            .bottom-nav {
+                width: 600px;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 20px;
+                border-radius: 35px;
+                height: 75px;
+                border: 1px solid rgba(212, 175, 55, 0.3);
+            }
+            .nav-item::after { bottom: -12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay Gate -->
+    <div class="overlay-gate" id="overlayGate">
+        <h2 style="font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--primary-dark);">Romeo & Juliet</h2>
+        <p style="font-size: 0.85rem; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 30px;">UNDANGAN PERNIKAHAN</p>
+        
+        <div class="guest-box">
+            <p>Kepada Yth:</p>
+            <div class="guest-name" id="guestNameGate">Tamu Undangan</div>
+        </div>
+        <br>
+        <button class="btn-action" onclick="openInvitation()">Buka Undangan</button>
+    </div>
+
+    <!-- Falling Flowers -->
+    <div class="petal-container" id="petalContainer"></div>
+
+    <!-- Audio Control -->
+    <div class="audio-control" onclick="toggleAudio()" id="audioButton" style="display: none;">
+        <svg id="audioIcon" viewBox="0 0 24 24" style="width:20px; fill:var(--primary-dark);">
+            <path d="M12 3v18.177l-5.646-5.646H2V8.469h4.354L12 3zm2 5.086c1.425.688 2.4 2.153 2.4 3.864 0 1.711-.975 3.177-2.4 3.864v-1.638c.614-.523 1-1.298 1-2.226 0-.928-.386-1.703-1-2.226V8.086z"/>
+        </svg>
+    </div>
+    <audio id="backsound" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 1. HOME -->
+    <section id="home">
+        <p class="home-subtitle">The Wedding of</p>
+        <h1 class="home-title">Romeo & Juliet</h1>
+        <div class="home-date">15 . 08 . 2026</div>
+        
+        <div class="guest-box">
+            <p>Spesial Kepada:</p>
+            <div class="guest-name" id="guestNameHome">Tamu Undangan</div>
+        </div>
+    </section>
+
+    <!-- 2. ACARA -->
+    <section id="acara">
+        <h2 class="section-title">Acara</h2>
+        <p class="section-subtitle">Momen Bahagia Kami</p>
+        
+        <div class="cards-container">
+            <div class="acara-card">
+                <h3>Akad Nikah</h3>
+                <p class="date">Sabtu, 15 Agustus 2026</p>
+                <p class="time">08.00 - 10.00 WIB</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">Masjid Agung Estetika<br>Jl. Kenangan Indah No. 12</p>
+            </div>
+            <div class="acara-card">
+                <h3>Resepsi</h3>
+                <p class="date">Sabtu, 15 Agustus 2026</p>
+                <p class="time">11.00 WIB - Selesai</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">Grand Ballroom Luxury<br>Jl. Kenangan Indah No. 45</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. TEMPAT -->
+    <section id="tempat">
+        <h2 class="section-title">Tempat</h2>
+        <p class="section-subtitle">Lokasi Pernikahan</p>
+        
+        <div class="map-box">
+            <div class="venue-name">Grand Ballroom Luxury</div>
+            <div class="venue-address">Jl. Kenangan Indah No. 45, Jakarta Selatan</div>
+            <div style="width: 100%; height: 250px; background: #e8e4de; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
+                <span style="color: var(--text-muted); font-size: 0.85rem;">[ Peta Google Maps ]</span>
+            </div>
+            <a href="https://maps.google.com" target="_blank" class="btn-action">Buka Peta</a>
+        </div>
+    </section>
+
+    <!-- 4. TRANSFER -->
+    <section id="transfer">
+        <h2 class="section-title">Transfer</h2>
+        <p class="section-subtitle">Kado Digital</p>
+        <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 600px; margin-bottom: 20px; line-height: 1.6;">
+            Doa restu Anda merupakan karunia terindah. Namun, bagi yang ingin memberikan tanda kasih, dapat disalurkan melalui:
+        </p>
+        
+        <div>
+            <div class="transfer-card">
+                <div class="bank-logo">BANK BCA</div>
+                <div class="account-number" id="bca-num">1234567890</div>
+                <div class="account-name">A/N Juliet Capulet</div>
+                <button class="btn-copy" onclick="copyText('bca-num')">Salin Rekening</button>
+            </div>
+            <div class="transfer-card">
+                <div class="bank-logo">DANA</div>
+                <div class="account-number" id="dana-num">081234567890</div>
+                <div class="account-name">A/N Romeo Montague</div>
+                <button class="btn-copy" onclick="copyText('dana-num')">Salin Nomor</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. GALERI (Infinite Loop + Lazyload) -->
+    <section id="galeri">
+        <h2 class="section-title">Galeri</h2>
+        <p class="section-subtitle">Kenangan Indah Kami</p>
+        
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <!-- Original 5 images -->
+                <div class="slide"><img data-src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=400&q=80" alt="Galeri 1" class="lazy"></div>
+                <div class="slide"><img data-src="https://images.unsplash
