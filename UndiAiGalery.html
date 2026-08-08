@@ -603,6 +603,138 @@
         
         <div class="slider-wrapper">
             <div class="slider-track">
-                <!-- Original 5 images -->
-                <div class="slide"><img data-src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=400&q=80" alt="Galeri 1" class="lazy"></div>
-                <div class="slide"><img data-src="https://images.unsplash
+                 <!-- Cloned 5 images for infinite loop effect -->
+                <div class="slide"><img data-src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=400&q=80" alt="Galeri 1 Clone" class="lazy"></div>
+                <div class="slide"><img data-src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=400&q=80" alt="Galeri 2 Clone" class="lazy"></div>
+                <div class="slide"><img data-src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=400&q=80" alt="Galeri 3 Clone" class="lazy"></div>
+                <div class="slide"><img data-src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=400&q=80" alt="Galeri 4 Clone" class="lazy"></div>
+                <div class="slide"><img data-src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=400&q=80" alt="Galeri 5 Clone" class="lazy"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <a href="#home" class="nav-item active">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 3l8 6v12h-5v-7h-6v7h-5v-12z"/></svg>
+            <span>Home</span>
+        </a>
+        <a href="#acara" class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
+            <span>Acara</span>
+        </a>
+        <a href="#tempat" class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span>Tempat</span>
+        </a>
+        <a href="#transfer" class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+            <span>Transfer</span>
+        </a>
+        <a href="#galeri" class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24"><path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/></svg>
+            <span>Galeri</span>
+        </a>
+    </nav>
+
+    <script>
+        // --- 1. Dynamic Name from URL ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestName = urlParams.get('to');
+        if (guestName) {
+            const formattedName = decodeURIComponent(guestName.replace(/\+/g, ' '));
+            document.getElementById('guestNameGate').innerText = formattedName;
+            document.getElementById('guestNameHome').innerText = formattedName;
+        }
+
+        // --- 2. Falling Petals Effect ---
+        const petalContainer = document.getElementById('petalContainer');
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            
+            const size = Math.random() * 8 + 8;
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size}px`;
+            petal.style.left = `${Math.random() * 100}vw`;
+            
+            const duration = Math.random() * 5 + 6; 
+            petal.style.animationDuration = `${duration}s`;
+            petal.style.animationDelay = `${Math.random() * 4}s`;
+            
+            petalContainer.appendChild(petal);
+
+            setTimeout(() => { petal.remove(); }, (duration + 4) * 1000);
+        }
+        setInterval(createPetal, 400);
+
+        // --- 3. Audio & Gate Control ---
+        const audio = document.getElementById('backsound');
+        const audioButton = document.getElementById('audioButton');
+        const overlayGate = document.getElementById('overlayGate');
+
+        function openInvitation() {
+            overlayGate.classList.add('hide');
+            audioButton.style.display = 'flex';
+            audio.play().catch(() => console.log("Autoplay blocked"));
+        }
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                document.getElementById('audioIcon').style.opacity = '1';
+            } else {
+                audio.pause();
+                document.getElementById('audioIcon').style.opacity = '0.4';
+            }
+        }
+
+        // --- 4. Copy to Clipboard ---
+        function copyText(elementId) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert("Berhasil disalin: " + textToCopy);
+            });
+        }
+
+        // --- 5. Intersection Observer for Lazyload Images & Nav Highlight ---
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lazy load images
+            let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            let imageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        let lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        // Add class for CSS transition after load
+                        lazyImage.onload = () => lazyImage.classList.add("loaded");
+                        imageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+            lazyImages.forEach(function(lazyImage) { imageObserver.observe(lazyImage); });
+
+            // Nav active state update based on scroll position
+            const sections = document.querySelectorAll("section");
+            const navItems = document.querySelectorAll(".nav-item");
+            
+            window.addEventListener("scroll", () => {
+                let current = "";
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 150) {
+                        current = section.getAttribute("id");
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.remove("active");
+                    if (item.getAttribute("href").includes(current)) {
+                        item.classList.add("active");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
